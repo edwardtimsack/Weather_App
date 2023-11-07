@@ -18,7 +18,7 @@ function userDay(){
     echo "a)Today b)Tomorrow c)Day After Tomorrow"
     read -p "Enter Day: " USER_DAY
 
-    # Validate user input
+    # Validate user inputs
     if [[ $USER_DAY == "a" || $USER_DAY == "A" ]]
     then
         USER_DAY=Today
@@ -41,7 +41,7 @@ function displayFormat(){
     echo "a)Graph b)Table"
     read -p "Enter Display Format: " DISPLAY_FORMAT
 
-    # Validate user input
+    # Validate user inputs
     if [[ $DISPLAY_FORMAT == "a" || $DISPLAY_FORMAT == "A" ]]
     then
         DISPLAY_FORMAT=Graph
