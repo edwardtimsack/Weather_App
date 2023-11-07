@@ -42,12 +42,12 @@ function displayFormat(){
     read -p "Enter Display Format: " DISPLAY_FORMAT
 
     # Validate user input
-    if [[ $USER_DAY == "a" || $USER_DAY == "A" ]]
+    if [[ $DISPLAY_FORMAT == "a" || $DISPLAY_FORMAT == "A" ]]
     then
-        USER_DAY=Graph
-    elif [[ $USER_DAY == "b" || $USER_DAY == "B" ]]
+        DISPLAY_FORMAT=Graph
+    elif [[ $DISPLAY_FORMAT == "b" || $DISPLAY_FORMAT == "B" ]]
     then
-        USER_DAY=Table
+        DISPLAY_FORMAT=Table
     else
         echo "Wrong input. You can only enter \"a, b\" or \"A, B\""
         displayFormat
