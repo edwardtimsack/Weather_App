@@ -36,3 +36,8 @@ Weather App is scripting application designed to fetch weather forecasts for a s
   ~~~
    Giving users the opportunity to see the weather forecast for one or more days after current day.
   ~~~
+
+  + WeatherAPI
+    ~~~
+    https://www.weatherapi.com/
+    ~~~
