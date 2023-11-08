@@ -1,6 +1,6 @@
 # Project Title: Weather_App
 
-# Features
+## Features
 + Location Input: Allow user to enter their location.
  
 + API Integration: Using curl to make HTTP requests to a weather API.
