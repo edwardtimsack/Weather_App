@@ -52,5 +52,6 @@ Weather App is scripting application designed to fetch weather forecasts for a s
       cut
       sort
       grep
+      loops
       awk ....
       ~~~
