@@ -1,5 +1,5 @@
 # Project Title: Weather_App
-
+Weather_App is scripting application designed to fetch weather forecasts for a specific location and display the weather information in the terminal. This app also includes API Intergration, Unit Conversion e.t.c.
 ## Features
 + Location Input: Allow user to enter their location.
  
