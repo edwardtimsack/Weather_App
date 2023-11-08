@@ -38,7 +38,6 @@ Weather App is scripting application designed to fetch weather forecasts for a s
   ~~~
 
    ### API Used
-  + WeatherAPI
 
     [weatherAPI.com](https://www.weatherapi.com/)
     
