@@ -39,9 +39,9 @@ Weather App is scripting application designed to fetch weather forecasts for a s
 
    ### API Used
   + WeatherAPI
-    ~~~
+
     [weatherAPI.com](https://www.weatherapi.com/)
-    ~~~
+    
     + Our API Key
       ~~~
       8f920a708a6e478aafa21737230811
