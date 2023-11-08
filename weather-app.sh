@@ -58,3 +58,17 @@ displayFormat
 
 
 echo "You want to know the weather of $USER_CITY for $USER_DAY in a $DISPLAY_FORMAT format."
+
+
+
+# My API_KEY from WeatherApi
+API_KEY="8f920a708a6e478aafa21737230811"
+
+# OpenWeatherMap API URL
+# API_URL="https://api.openweathermap.org/data/2.5/weather?q=$USER_CITY&appid=$API_KEY"
+API_URL="http://api.weatherapi.com/v1/current.json?key=8f920a708a6e478aafa21737230811&q=$USER_CITY&aqi=no"
+
+
+# Making a GET request to the Weather API
+response=$(curl -s "$API_URL")
+echo "$response" 
