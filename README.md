@@ -45,3 +45,12 @@ Weather App is scripting application designed to fetch weather forecasts for a s
       ~~~
       8f920a708a6e478aafa21737230811
       ~~~
+
+    ### Concepts To Be Used
+    + Basically a table that we are manipulating data from and will also include the following commands:
+      ~~~
+      cut
+      sort
+      grep
+      awk ....
+      ~~~
