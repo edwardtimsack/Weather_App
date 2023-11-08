@@ -40,7 +40,7 @@ Weather App is scripting application designed to fetch weather forecasts for a s
    ### API Used
   + WeatherAPI
     ~~~
-    [(https://www.weatherapi.com/)]
+    [weatherAPI.com](https://www.weatherapi.com/)
     ~~~
     + Our API Key
       ~~~
