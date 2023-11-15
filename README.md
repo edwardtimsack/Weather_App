@@ -37,7 +37,7 @@ Weather App is scripting application designed to fetch weather forecasts for a s
    Giving users the opportunity to see the weather forecast for one or more days after current day.
   ~~~
 
-   ### API Used
+   ## API Used
 
     [weatherAPI.com](https://www.weatherapi.com/)
     
@@ -46,7 +46,7 @@ Weather App is scripting application designed to fetch weather forecasts for a s
       8f920a708a6e478aafa21737230811
       ~~~
 
-    ### Concepts To Be Used
+    ## Concepts To Be Used
     + Basically a table that we are manipulating data from and will also include the following commands:
       ~~~
       cut
