@@ -58,17 +58,43 @@ displayFormat
 
 
 echo "You want to know the weather of $USER_CITY for $USER_DAY in a $DISPLAY_FORMAT format."
-
+echo
 
 
 # My API_KEY from WeatherApi
 API_KEY="8f920a708a6e478aafa21737230811"
 
 # OpenWeatherMap API URL
-# API_URL="https://api.openweathermap.org/data/2.5/weather?q=$USER_CITY&appid=$API_KEY"
 API_URL="http://api.weatherapi.com/v1/current.json?key=8f920a708a6e478aafa21737230811&q=$USER_CITY&aqi=no"
 
 
 # Making a GET request to the Weather API
 response=$(curl -s "$API_URL")
-echo "$response" 
+# echo "$response" 
+
+
+country=$(echo "$response" | jq -r '.location.country')
+localtime=$(echo "$response" | jq -r '.location.localtime')
+text=$(echo "$response" | jq -r '.current.condition.text')
+image=$(echo "$response" | jq -r '.current.condition.icon')
+temperature_celsuis=$(echo "$response" | jq -r '.current.temp_c')
+temperature_farenheit=$(echo "$response" | jq -r '.current.temp_f')
+humidity=$(echo "$response" | jq -r '.current.humidity')
+wind_direction=$(echo "$response" | jq -r '.current.wind_dir')
+
+echo "Country's Name: $country"
+echo
+echo "Country's Localtime: $localtime"
+echo
+echo "Weather is $text"
+echo
+curl -s "https:$image" | imgcat
+echo
+echo "$temperature_celsuis ॰C"
+echo
+echo "$temperature_farenheit ॰F"
+echo
+echo "Humidity: $humidity"
+echo
+echo "Wind's Direction: $wind_direction"
+
