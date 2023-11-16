@@ -15,19 +15,23 @@ userCity
 # Prompt user to enter the day the want the weather for
 function userDay(){
     echo ""
-    echo "a)Today b)Tomorrow c)Day After Tomorrow"
+    sleep 1
+    echo "Weather for when?"
+    echo "A) Today" 
+    echo "B) Tomorrow" 
+    echo "C) Day After Tomorrow"
     read -p "Enter Day: " USER_DAY
 
     # Validate user inputs
     if [[ $USER_DAY == "a" || $USER_DAY == "A" ]]
     then
-        USER_DAY=Today
+        USER_DAY=1
     elif [[ $USER_DAY == "b" || $USER_DAY == "B" ]]
     then
-        USER_DAY=Tomorrow
+        USER_DAY=2
     elif [[ $USER_DAY == "c" || $USER_DAY == "C" ]]
     then
-        USER_DAY="Day After Tomorrow"
+        USER_DAY=3
     else
         echo "Wrong input. You can only enter \"a, b, c\" or \"A, B, C\""
         userDay
@@ -35,66 +39,46 @@ function userDay(){
 }
 userDay
 
-# Prompt user to enter theformat the want the weather in
-function displayFormat(){
-    echo ""
-    echo "a)Graph b)Table"
-    read -p "Enter Display Format: " DISPLAY_FORMAT
-
-    # Validate user inputs
-    if [[ $DISPLAY_FORMAT == "a" || $DISPLAY_FORMAT == "A" ]]
-    then
-        DISPLAY_FORMAT=Graph
-    elif [[ $DISPLAY_FORMAT == "b" || $DISPLAY_FORMAT == "B" ]]
-    then
-        DISPLAY_FORMAT=Table
-    else
-        echo "Wrong input. You can only enter \"a, b\" or \"A, B\""
-        displayFormat
-    fi
-    echo
-}
-displayFormat
-
-
-echo "You want to know the weather of $USER_CITY for $USER_DAY in a $DISPLAY_FORMAT format."
-echo
-
-
-# My API_KEY from WeatherApi
-API_KEY="8f920a708a6e478aafa21737230811"
-
-# OpenWeatherMap API URL
-API_URL="http://api.weatherapi.com/v1/current.json?key=8f920a708a6e478aafa21737230811&q=$USER_CITY&aqi=no"
-
-
-# Making a GET request to the Weather API
-response=$(curl -s "$API_URL")
+# Get weather data from API
+function getData(){
+API_KEY="8f920a708a6e478aafa21737230811"  # My API_KEY from WeatherApi
+API_URL="http://api.weatherapi.com/v1/forecast.json?key=$API_KEY&q=$USER_CITY&aqi=no&days=$USER_DAY" # OpenWeatherMap API URL
+response=$(curl -s "$API_URL") # Making a GET request to the Weather API
 # echo "$response" 
 
+# Checking if city is valid
+  if [[ $(echo "$response" | jq -r ".error.code") -eq 1006 ]]
+    then
+        echo
+        echo "      NOTE: City not found! Please try again."
+        echo
+        userCity
+        userDay
+        getData
+    else
+        # Search through the API and store relevant data in clearly named variables
+        forecast=$(echo "$response" | jq -r ".forecast.forecastday[$(($USER_DAY -1))]")
+        country=$(echo "$response" | jq -r ".location.country")
+        date=$(echo "$forecast" | jq -r ".date")
+        text=$(echo "$forecast" | jq -r ".day.condition.text")
+        image=$(echo "$forecast" | jq -r ".day.condition.icon")
+        temperature_celsuis=$(echo "$forecast" | jq -r ".day.avgtemp_c")
+        temperature_fahrenheit=$(echo "$forecast" | jq -r ".day.avgtemp_f")
+        humidity=$(echo "$forecast" | jq -r ".day.avghumidity")
+        wind_direction=$(echo "$forecast" | jq -r '.current.wind_dir')
 
-country=$(echo "$response" | jq -r '.location.country')
-localtime=$(echo "$response" | jq -r '.location.localtime')
-text=$(echo "$response" | jq -r '.current.condition.text')
-image=$(echo "$response" | jq -r '.current.condition.icon')
-temperature_celsuis=$(echo "$response" | jq -r '.current.temp_c')
-temperature_farenheit=$(echo "$response" | jq -r '.current.temp_f')
-humidity=$(echo "$response" | jq -r '.current.humidity')
-wind_direction=$(echo "$response" | jq -r '.current.wind_dir')
-
-echo "Country's Name: $country"
-echo
-echo "Country's Localtime: $localtime"
-echo
-echo "Weather is $text"
-echo
-curl -s "https:$image" | imgcat
-echo
-echo "$temperature_celsuis ॰C"
-echo
-echo "$temperature_farenheit ॰F"
-echo
-echo "Humidity: $humidity"
-echo
-echo "Wind's Direction: $wind_direction"
-
+       
+        # Adding data to tables
+        echo "      WEATHER DETAILS" > weather.csv
+        echo "      COUNTRY: $country" >> weather.csv
+        echo "      DATE: $date" >> weather.csv
+        echo "      CONDITION: $text" >> weather.csv
+        echo "      TEMPERATURE: $temperature_celsuis ॰C / $temperature_fahrenheit ॰F" >> weather.csv
+        echo "      HUMIDITY: $humidity" >> weather.csv
+        echo
+        curl -s "https:$image" | imgcat
+        cat weather.csv   
+        echo  
+    fi 
+}
+getData
