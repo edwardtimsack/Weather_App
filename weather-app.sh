@@ -29,22 +29,17 @@ function command_exists() {
     else
     if [[ $USER_RESPONSE == "y" || $USER_RESPONSE == "Y" ]]; then
         # Install dependencies
-        sudo apt install -y jq
-        sudo snap install -y imgcat
-        sudo apt install -y curl
+        (
+             sudo apt install -y jq
+             sudo snap install -y imgcat
+             sudo apt install -y curl
+        ) &
+       
     else
         echo "Exiting without installing dependencies."
         exit 0
     fi
 fi
-
-# Rest of your script...
-
-
-
-
-
-
 
 function greeting() {
     echo
