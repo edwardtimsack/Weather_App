@@ -1,8 +1,58 @@
 #! /bin/bash
-echo
-echo "WEATHER APP"
-echo "Hello $(whoami)"
-echo
+
+# read -p "Download dependencies y/n: " USER_RESPONSE
+
+# if [[ $USER_RESPONSE == "y"  || $USER_RESPONSE == "Y" ]]
+#     then    
+#         sudo apt install -y jq
+#         sudo snap install -y imgcat
+#         sudo apt install -y curl
+# else
+#     exit 0
+# fi
+
+# dsfvbz hm fb
+
+#!/bin/bash
+
+# Function to check if a command is available
+function command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+
+    read -p "Download dependencies? (y/n): " USER_RESPONSE
+
+# Check if dependencies are already installed
+    if command_exists jq && command_exists imgcat && command_exists curl; then
+    echo "Dependencies are already installed."  
+    else
+    if [[ $USER_RESPONSE == "y" || $USER_RESPONSE == "Y" ]]; then
+        # Install dependencies
+        sudo apt install -y jq
+        sudo snap install -y imgcat
+        sudo apt install -y curl
+    else
+        echo "Exiting without installing dependencies."
+        exit 0
+    fi
+fi
+
+# Rest of your script...
+
+
+
+
+
+
+
+function greeting() {
+    echo
+    echo "WEATHER APP"
+    echo "Hello $(whoami)"
+    echo
+}
+greeting
 
 # Prompt user to enter city
 function userCity(){
@@ -76,9 +126,80 @@ response=$(curl -s "$API_URL") # Making a GET request to the Weather API
         echo "      TEMPERATURE: $temperature_celsuis ॰C / $temperature_fahrenheit ॰F" >> weather.csv
         echo "      HUMIDITY: $humidity" >> weather.csv
         echo
-        curl -s "https:$image" | imgcat
-        cat weather.csv   
-        echo  
     fi 
 }
 getData
+
+
+echo
+curl -s "https:$image" | imgcat
+echo  "   $text"
+
+# Display weather data
+function displayData(){
+
+    function displayTemperature(){
+        awk '/TEMPERATURE:/ {print $0}' weather.csv
+    }
+    function displayHumidity(){
+        grep "HUMIDITY:" weather.csv
+    }
+    function searchData(){
+        echo
+        read -p "      Search : " USER_SEARCH
+        echo
+        grep -iw "$USER_SEARCH" weather.csv
+    }
+
+    function viewData(){
+        column weather.csv
+    }
+    # Display options to users
+    echo
+    echo
+    echo "      OPTIONS"
+    echo "      A) View Temperature"
+    echo "      B) View Humidity" 
+    echo "      C) Search"
+    echo "      D) View All"
+    echo "      E) Home"
+
+    read -p "      Enter Option: " USER_OPTIONS
+    echo
+
+    # Validate user inputs
+    if [[ $USER_OPTIONS == "a" || $USER_OPTIONS == "A" ]]
+    then
+        displayTemperature
+        sleep 2
+        displayData
+    elif [[ $USER_OPTIONS == "b" || $USER_OPTIONS == "B" ]]
+    then
+        displayHumidity
+        sleep 2
+        displayData
+    elif [[ $USER_OPTIONS == "c" || $USER_OPTIONS == "C" ]]
+    then
+        searchData
+        sleep 2
+        displayData
+    elif [[ $USER_OPTIONS == "d" || $USER_OPTIONS == "D" ]]
+    then
+        viewData
+        sleep 2
+        displayData
+    elif [[ $USER_OPTIONS == "e" || $USER_OPTIONS == "E" ]]
+    then
+        greeting
+        userCity
+        userDay
+        getData
+        displayData
+    else
+        echo "      Wrong input. You can only enter \"a, b, c, d, e\" or \"A, B, C, D, E\""
+        sleep 2
+        displayData
+    fi
+    echo 
+}
+displayData
