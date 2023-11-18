@@ -45,9 +45,9 @@ Weather App is scripting application designed to fetch weather forecasts for a s
   
   + Basically a table that we are manipulating data from and will also include the following commands:
       ~~~
-      cut
-      sort
+      if & else if
+      function
       grep
-      loops
+      variable
       awk ....
       ~~~
