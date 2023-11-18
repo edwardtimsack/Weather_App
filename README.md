@@ -26,11 +26,6 @@ Weather App is scripting application designed to fetch weather forecasts for a s
   ~~~
    Conditional statements and error checking techniques to handle issuses like invalid location input or failed API requests.
   ~~~
- 
-+ Interactive Features
-  ~~~
-   Using loops to allow user to check weather for multiple locations sequentially.
-  ~~~
   
 + Forecast
   ~~~
