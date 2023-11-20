@@ -23,7 +23,7 @@ else
             sudo snap install -y imgcat
             sudo apt install -y curl
         ) &
-    
+        wait
     else
         echo
         echo "Exiting without installing dependencies."
