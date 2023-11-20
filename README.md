@@ -2,7 +2,7 @@
 Weather App is scripting application designed to fetch weather forecasts for a specific location and display the weather information in the terminal. This app also includes API Intergration, Unit Conversion e.t.c.
 
 ## Installation
-+ Download [weather-app.sh]()
++ Download [weather-app.sh](https://github.com/edwardtimsack/weather-app/blob/main/weather-app.sh)
 + Make script file executable
 ```
 chmod +x weather-app.sh
