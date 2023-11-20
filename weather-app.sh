@@ -11,8 +11,7 @@ if command_exists jq && command_exists imgcat && command_exists curl;
 then
     echo
     echo "Dependencies are already installed."  
-elif !command_exists jq && !command_exists imgcat && !command_exists curl;
-then
+else
     echo
     read -p "Download dependencies? (y/n): " USER_RESPONSE
     if [[ $USER_RESPONSE == "y" || $USER_RESPONSE == "Y" ]]; 
