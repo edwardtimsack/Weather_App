@@ -6,6 +6,7 @@ function command_exists() {
 }
 
 
+function dependencies(){
 # Check if dependencies are already installed
 if command_exists jq && command_exists imgcat && command_exists curl; 
 then
@@ -29,6 +30,9 @@ else
         exit 0
     fi
 fi
+}
+dependencies
+
 
 function greeting() {
     echo
