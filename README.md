@@ -26,11 +26,6 @@ chmod +x weather-app.sh
   ~~~
    Displaying the retrieved weather data in the terminal. For JSON Parsing we use 'jq' a command-line JSON Processor, to extract specific fields from the API response.
   ~~~
- 
-+ Unit Conversion
-  ~~~
-   Providing options for user to select units. Eg: Celsuis or Fahrenheit
-  ~~~
   
 + Error Handling
   ~~~
