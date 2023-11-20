@@ -1,18 +1,3 @@
-#! /bin/bash
-
-# read -p "Download dependencies y/n: " USER_RESPONSE
-
-# if [[ $USER_RESPONSE == "y"  || $USER_RESPONSE == "Y" ]]
-#     then    
-#         sudo apt install -y jq
-#         sudo snap install -y imgcat
-#         sudo apt install -y curl
-# else
-#     exit 0
-# fi
-
-# dsfvbz hm fb
-
 #!/bin/bash
 
 # Function to check if a command is available
@@ -21,21 +6,26 @@ function command_exists() {
 }
 
 
-    read -p "Download dependencies? (y/n): " USER_RESPONSE
-
 # Check if dependencies are already installed
-    if command_exists jq && command_exists imgcat && command_exists curl; then
+if command_exists jq && command_exists imgcat && command_exists curl; 
+then
+    echo
     echo "Dependencies are already installed."  
-    else
-    if [[ $USER_RESPONSE == "y" || $USER_RESPONSE == "Y" ]]; then
+elif !command_exists jq && !command_exists imgcat && !command_exists curl;
+then
+    echo
+    read -p "Download dependencies? (y/n): " USER_RESPONSE
+    if [[ $USER_RESPONSE == "y" || $USER_RESPONSE == "Y" ]]; 
+    then
         # Install dependencies
         (
-             sudo apt install -y jq
-             sudo snap install -y imgcat
-             sudo apt install -y curl
+            sudo apt install -y jq
+            sudo snap install -y imgcat
+            sudo apt install -y curl
         ) &
-       
+    
     else
+        echo
         echo "Exiting without installing dependencies."
         exit 0
     fi
