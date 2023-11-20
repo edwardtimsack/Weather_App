@@ -37,6 +37,10 @@ chmod +x weather-app.sh
    Giving users the opportunity to see the weather forecast for one or more days after current day.
   ~~~
 
++ Interactive Features
+  ~~~
+   Use recursion to allow users to check weather for multiple locations sequentially.
+  ~~~
   ### API Used
 
     [weatherAPI.com](https://www.weatherapi.com/)
